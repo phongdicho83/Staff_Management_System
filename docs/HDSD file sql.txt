@@ -1,0 +1,3 @@
+Import file sql vào trong phpadmin
+Không phải copy lệnh vào chạy
+Trước khi nhấn Import nhớ bỏ tích phần Check Foreign Keys.
