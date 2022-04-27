@@ -30,7 +30,7 @@ public class MyConnection {
     Connection conn = null;
 
     String server = "localhost:3306";
-    String dbName = "sinhvien";
+    String dbName = "staff_salary_management";
     String userName = "root";
     String pass = "";
 
