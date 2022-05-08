@@ -1,12 +1,15 @@
 package staff_management_system.UI;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import staff_management_system.BUS.NguoiThanBUS;
 import staff_management_system.BUS.NhanVienBUS;
 import staff_management_system.DTO.NguoiThan;
 import staff_management_system.DTO.NhanVien;
+import staff_management_system.Helpers.CommonAttribute;
 
 public class NguoiThanUI extends javax.swing.JFrame {
 
@@ -15,12 +18,17 @@ public class NguoiThanUI extends javax.swing.JFrame {
      */
     public NguoiThanUI() {
         initComponents();
+        cbMQH.setSelectedItem(null);
         NhanVienBUS bus = new NhanVienBUS();
-        if (NhanVienBUS.dsnv == null) {
-            bus.docDSNV();
+        if (CommonAttribute.dsnt == null) {
+            try {
+                bus.getNhanViens();
+            } catch (Exception ex) {
+                Logger.getLogger(NguoiThanUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        for (NhanVien nv : NhanVienBUS.dsnv) {
-            cbMaNV.addItem(nv.getMa());
+        for (NhanVien nv : CommonAttribute.dsnv) {
+            cbMaNV.addItem(nv.getMaNV());
         }
         ganDS();
     }
@@ -42,21 +50,21 @@ public class NguoiThanUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbMQH = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rdbNam = new javax.swing.JRadioButton();
+        rdbNu = new javax.swing.JRadioButton();
+        rdbOther = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jPanel3 = new javax.swing.JPanel();
         btThem = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btSua = new javax.swing.JButton();
+        btXoa = new javax.swing.JButton();
+        btMoi = new javax.swing.JButton();
+        btnTim = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblNguoiThan = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +89,11 @@ public class NguoiThanUI extends javax.swing.JFrame {
         jLabel2.setText("Mã NV:");
 
         cbMaNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mã nv" }));
+        cbMaNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMaNVActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("STT:");
 
@@ -92,14 +105,14 @@ public class NguoiThanUI extends javax.swing.JFrame {
 
         jLabel6.setText("Giới tính:");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Nam");
+        buttonGroup1.add(rdbNam);
+        rdbNam.setText("Nam");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Nữ");
+        buttonGroup1.add(rdbNu);
+        rdbNu.setText("Nữ");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Khác");
+        buttonGroup1.add(rdbOther);
+        rdbOther.setText("Khác");
 
         jLabel7.setText("Năm sinh:");
 
@@ -131,11 +144,11 @@ public class NguoiThanUI extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(cbMQH, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rdbNam, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rdbNu, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(rdbOther, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(0, 0, Short.MAX_VALUE)))))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -161,9 +174,9 @@ public class NguoiThanUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(rdbNam)
+                    .addComponent(rdbNu)
+                    .addComponent(rdbOther))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -178,31 +191,31 @@ public class NguoiThanUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sửa");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSua.setText("Sửa");
+        btSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSuaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Xóa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btXoa.setText("Xóa");
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btXoaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Mới");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btMoi.setText("Mới");
+        btMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btMoiActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Tìm Kiếm");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnTim.setText("Tìm Kiếm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnTimActionPerformed(evt);
             }
         });
 
@@ -218,10 +231,10 @@ public class NguoiThanUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(btSua, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(btXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(btMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addComponent(btnTim, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
@@ -229,18 +242,18 @@ public class NguoiThanUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNguoiThan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -251,12 +264,12 @@ public class NguoiThanUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblNguoiThan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tblNguoiThanMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblNguoiThan);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -302,7 +315,7 @@ public class NguoiThanUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ganDS() {
-        if (NguoiThanBUS.dsnt == null) {
+        if (CommonAttribute.dsnt == null) {
             bus.docDSNT();
         }
 
@@ -312,12 +325,10 @@ public class NguoiThanUI extends javax.swing.JFrame {
         header.add("Tên");
         header.add("Mối quan hệ");
         header.add("Giới tính");
-        header.add("CMND/CCCD");
-        header.add("Mã phòng ban");
-        header.add("Mã chức vụ");
+        header.add("Năm sinh");
         model = new DefaultTableModel(header, 0);
         Vector row;
-        for (NguoiThan nt : NguoiThanBUS.dsnt) {
+        for (NguoiThan nt : CommonAttribute.dsnt) {
             row = new Vector();
             row.add(nt.getMaNV());
             row.add(nt.getStt());
@@ -327,7 +338,7 @@ public class NguoiThanUI extends javax.swing.JFrame {
             row.add(nt.getNamSinh());
             model.addRow(row);
         }
-        jTable1.setModel(model);
+        tblNguoiThan.setModel(model);
     }
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
@@ -344,11 +355,11 @@ public class NguoiThanUI extends javax.swing.JFrame {
         nt.setStt(txSTT.getText());
         nt.setHoTen(txTen.getText());
         nt.setMoiQuanHe(cbMQH.getSelectedItem() + "");
-        if (jRadioButton1.isSelected()) {
+        if (rdbNam.isSelected()) {
             nt.setGioiTinh("Nam");
-        } else if (jRadioButton2.isSelected()) {
+        } else if (rdbNu.isSelected()) {
             nt.setGioiTinh("Nữ");
-        } else if (jRadioButton3.isSelected()) {
+        } else if (rdbOther.isSelected()) {
             nt.setGioiTinh("Khác");
         }
         nt.setNamSinh(jYearChooser1.getYear() + "");
@@ -362,11 +373,11 @@ public class NguoiThanUI extends javax.swing.JFrame {
         row.add(nt.getGioiTinh());
         row.add(nt.getNamSinh());
         model.addRow(row);
-        jTable1.setModel(model);
+        tblNguoiThan.setModel(model);
     }//GEN-LAST:event_btThemActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int i = jTable1.getSelectedRow();
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        int i = tblNguoiThan.getSelectedRow();
 
         if (i >= 0) {
             if (!bus.checkPK(cbMaNV.getSelectedItem() + "", txSTT.getText())) {
@@ -380,11 +391,11 @@ public class NguoiThanUI extends javax.swing.JFrame {
             nt.setStt(txSTT.getText());
             nt.setHoTen(txTen.getText());
             nt.setMoiQuanHe(cbMQH.getSelectedItem() + "");
-            if (jRadioButton1.isSelected()) {
+            if (rdbNam.isSelected()) {
                 nt.setGioiTinh("Nam");
-            } else if (jRadioButton2.isSelected()) {
+            } else if (rdbNu.isSelected()) {
                 nt.setGioiTinh("Nữ");
-            } else if (jRadioButton3.isSelected()) {
+            } else if (rdbOther.isSelected()) {
                 nt.setGioiTinh("Khác");
             }
             nt.setNamSinh(jYearChooser1.getYear() + "");
@@ -396,56 +407,60 @@ public class NguoiThanUI extends javax.swing.JFrame {
             model.setValueAt(nt.getMoiQuanHe(), i, 3);
             model.setValueAt(nt.getGioiTinh(), i, 4);
             model.setValueAt(nt.getNamSinh(), i, 5);
-            jTable1.setModel(model);
+            tblNguoiThan.setModel(model);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btSuaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int i = jTable1.getSelectedRow();
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        int i = tblNguoiThan.getSelectedRow();
         if (i >= 0) {
             bus.xoaNT(i);
             model.removeRow(i);
-            jTable1.setModel(model);
+            tblNguoiThan.setModel(model);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btXoaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTable1.clearSelection();
+    private void btMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMoiActionPerformed
+        tblNguoiThan.clearSelection();
         cbMaNV.setSelectedIndex(0);
         txSTT.setText("");
         txTen.setText("");
-        cbMQH.setSelectedIndex(0);
+        cbMQH.setSelectedItem(null);
         buttonGroup1.clearSelection();
         jYearChooser1.setYear(2022);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btMoiActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnTimActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int i = jTable1.getSelectedRow();
+    private void tblNguoiThanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNguoiThanMouseClicked
+        int i = tblNguoiThan.getSelectedRow();
         if (i >= 0) {
             NguoiThan nt;
-            nt = NguoiThanBUS.dsnt.get(i);
+            nt = CommonAttribute.dsnt.get(i);
             cbMaNV.setSelectedItem(nt.getMaNV());
             txSTT.setText(nt.getStt());
             txTen.setText(nt.getHoTen());
             cbMQH.setSelectedItem(nt.getMoiQuanHe());
             if (nt.getGioiTinh().equalsIgnoreCase("nam")) {
-                jRadioButton1.setSelected(true);
+                rdbNam.setSelected(true);
             } else if (nt.getGioiTinh().equalsIgnoreCase("nữ")) {
-                jRadioButton2.setSelected(true);
+                rdbNu.setSelected(true);
             } else if (nt.getGioiTinh().equalsIgnoreCase("khác")) {
-                jRadioButton3.setSelected(true);
+                rdbOther.setSelected(true);
             }
             jYearChooser1.setYear(Integer.parseInt(nt.getNamSinh()));
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tblNguoiThanMouseClicked
+
+    private void cbMaNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMaNVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMaNVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,14 +500,14 @@ public class NguoiThanUI extends javax.swing.JFrame {
     NguoiThanBUS bus = new NguoiThanBUS();
     DefaultTableModel model = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btMoi;
+    private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
+    private javax.swing.JButton btXoa;
+    private javax.swing.JButton btnTim;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbMQH;
     private javax.swing.JComboBox<String> cbMaNV;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -505,12 +520,12 @@ public class NguoiThanUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
+    private javax.swing.JRadioButton rdbNam;
+    private javax.swing.JRadioButton rdbNu;
+    private javax.swing.JRadioButton rdbOther;
+    private javax.swing.JTable tblNguoiThan;
     private javax.swing.JTextField txSTT;
     private javax.swing.JTextField txTen;
     // End of variables declaration//GEN-END:variables

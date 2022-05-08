@@ -17,13 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import staff_management_system.BUS.NhanVienBUS;
 import staff_management_system.DTO.NhanVien;
+import staff_management_system.Helpers.CommonAttribute;
 /**
  *
  * @author Chi Thien
  */
 public class NhanVienUI extends javax.swing.JFrame {
     DefaultTableModel model;
-    public static ArrayList<NhanVien> listNhanVien;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
     /**
      * Creates new form NhanVienUI
@@ -32,7 +32,7 @@ public class NhanVienUI extends javax.swing.JFrame {
         initComponents();
         cbGioiTinh.setSelectedItem(null);
         readData();
-        loadData(listNhanVien);
+        loadData(CommonAttribute.dsnv);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -291,7 +291,7 @@ public class NhanVienUI extends javax.swing.JFrame {
             NhanVienBUS bus = new NhanVienBUS();
             bus.addNhanVien(nhanVien);
             readData();
-            loadData(listNhanVien);
+            loadData(CommonAttribute.dsnv);
             btLamMoiActionPerformed(evt);
 
         } catch (Exception e) {
@@ -321,7 +321,7 @@ public class NhanVienUI extends javax.swing.JFrame {
         if (bus.updateNhanVien(nhanVien)) {
             MessageDialogHelper.showMessageDialog(jLabel1, "Cập nhật thông tin nhân viên thành công!", "Thông báo");
             readData();
-            loadData(listNhanVien);
+            loadData(CommonAttribute.dsnv);
             btLamMoiActionPerformed(evt);
         } else
             MessageDialogHelper.showErrorDialog(jLabel1, "Cập thông thông tin nhân viên thất bại", "Lỗi");
@@ -334,14 +334,14 @@ public class NhanVienUI extends javax.swing.JFrame {
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
         int i = tblNhanVien.getSelectedRow();
-        txtMaNhanVien.setText(listNhanVien.get(i).getMaNV());
-        txtHo.setText(listNhanVien.get(i).getHo());
-        txtTen.setText(listNhanVien.get(i).getTen());
-        DateChooserNgaySinh.setDate(listNhanVien.get(i).getNgaySinh());
-        txtSoDienThoai.setText(listNhanVien.get(i).getSoDienThoai());
-        cbGioiTinh.setSelectedItem(listNhanVien.get(i).getGioiTinh());
-        txtMaPhongBan.setText(listNhanVien.get(i).getMaPhongBan());
-        txtMaChucVu.setText(listNhanVien.get(i).getMaChucVu());
+        txtMaNhanVien.setText(CommonAttribute.dsnv.get(i).getMaNV());
+        txtHo.setText(CommonAttribute.dsnv.get(i).getHo());
+        txtTen.setText(CommonAttribute.dsnv.get(i).getTen());
+        DateChooserNgaySinh.setDate(CommonAttribute.dsnv.get(i).getNgaySinh());
+        txtSoDienThoai.setText(CommonAttribute.dsnv.get(i).getSoDienThoai());
+        cbGioiTinh.setSelectedItem(CommonAttribute.dsnv.get(i).getGioiTinh());
+        txtMaPhongBan.setText(CommonAttribute.dsnv.get(i).getMaPhongBan());
+        txtMaChucVu.setText(CommonAttribute.dsnv.get(i).getMaChucVu());
     }//GEN-LAST:event_tblNhanVienMouseClicked
     
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
@@ -354,11 +354,11 @@ public class NhanVienUI extends javax.swing.JFrame {
         }
         
         NhanVienBUS bus = new NhanVienBUS();
-        if (bus.delNhanVien(listNhanVien.get(i).getMaNV())) {
-            listNhanVien.remove(i);
+        if (bus.delNhanVien(CommonAttribute.dsnv.get(i).getMaNV())) {
+            CommonAttribute.dsnv.remove(i);
             MessageDialogHelper.showMessageDialog(jLabel1, "Xóa thông tin nhân viên thành công!", "Thông báo");
             readData();
-            loadData(listNhanVien);
+            loadData(CommonAttribute.dsnv);
             btLamMoiActionPerformed(evt);
         } else {
             MessageDialogHelper.showErrorDialog(jLabel1, "Xóa thông tin nhân viên không thành công", "Lỗi");
@@ -372,7 +372,7 @@ public class NhanVienUI extends javax.swing.JFrame {
     public void readData() {
         NhanVienBUS bus = new NhanVienBUS();
         try {
-            listNhanVien = bus.getNhanViens();
+            CommonAttribute.dsnv = bus.getNhanViens();
         } catch (Exception ex) {
             Logger.getLogger(NhanVienUI.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -8,7 +8,7 @@ import staff_management_system.DTO.NguoiThan;
 import staff_management_system.Helpers.ConnectSql;
 
 public class NguoiThanDAO {
-    ConnectSql con = new ConnectSql("localhost","root","thanhnga","staff_salary_management");
+    ConnectSql con = new ConnectSql("localhost","root","","staff_salary_management");
     
     public NguoiThanDAO(){
     }

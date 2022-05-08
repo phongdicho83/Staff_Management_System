@@ -8,6 +8,7 @@ import Helpers.MessageDialogHelper;
 import java.util.ArrayList;
 import staff_management_system.DAO.NhanVienDAO;
 import staff_management_system.DTO.NhanVien;
+import staff_management_system.Helpers.CommonAttribute;
 import staff_management_system.UI.NhanVienUI;
 
 /**
@@ -17,7 +18,7 @@ import staff_management_system.UI.NhanVienUI;
 public class NhanVienBUS {
     public ArrayList<NhanVien> getNhanViens() throws Exception {
         NhanVienDAO dao = new NhanVienDAO();
-        return NhanVienUI.listNhanVien = dao.getNhanViens();
+        return CommonAttribute.dsnv = dao.getNhanViens();
     }
 
     public boolean addNhanVien(NhanVien nhanVien) {
