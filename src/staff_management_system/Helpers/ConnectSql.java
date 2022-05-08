@@ -34,7 +34,7 @@ public class ConnectSql {
     protected Connection getConnect() throws Exception {
         if(connect==null){
             driverTest();
-            String url="jdbc:mysql://"+Host+":3307/"+Dtb;
+            String url="jdbc:mysql://"+Host+":3306/"+Dtb;
             try {
                 this.connect=DriverManager.getConnection(url,UserName,Pass);
             }
