@@ -15,7 +15,7 @@ public class NguoiThanDAO {
     
     public ArrayList docDSNT(){
         ArrayList dsnt = new ArrayList<NguoiThan>();
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             String qry = "SELECT * FROM nguoithan";
             rs = con.excuteQuery(qry);
@@ -36,7 +36,7 @@ public class NguoiThanDAO {
         return dsnt;
     }
     
-    public void themNT(NguoiThan nt){
+    public boolean themNT(NguoiThan nt){
         try {
             String s="INSERT INTO nguoithan VALUES ";
             s+="('"+nt.getMaNV()+"','"+nt.getStt()+"','"+nt.getHoTen()+"','"+nt.getMoiQuanHe()+"','"+nt.getGioiTinh()+"','"+nt.getNamSinh()+"');";
@@ -44,10 +44,12 @@ public class NguoiThanDAO {
             con.Close();
         } catch (Exception ex) {
             Logger.getLogger(NguoiThanDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
-    public void suaNT(NguoiThan nt){
+    public boolean suaNT(NguoiThan nt){
         try {
             String s="UPDATE nguoithan SET ";
             s+="TenNguoiThan='"+nt.getHoTen()+"',MoiQuanHe='"+nt.getMoiQuanHe()+"',GioiTinh='"+nt.getGioiTinh();
@@ -56,17 +58,21 @@ public class NguoiThanDAO {
             con.Close();
         } catch (Exception ex) {
             Logger.getLogger(NguoiThanDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
-    public void xoaNT(String ma, String stt){
+    public boolean xoaNT(String ma, String stt){
         try {
             String s = "DELETE FROM nguoithan WHERE MaNV='"+ma+"' AND STT='"+stt+"';";
             con.executeUpdate(s);
             con.Close();
         } catch (Exception ex) {
             Logger.getLogger(NguoiThanDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
     
 }
