@@ -70,12 +70,12 @@ public class NguoiThanBUS {
         switch(num1){
             case 1:
                 for (NguoiThan temp: dsnt)
-                    if(temp.getMaNV().contains(s))
+                    if(temp.getMaNV().toUpperCase().contains(s.toUpperCase()))
                         nt.add(temp);
                 break;
             case 2:
                 for (NguoiThan temp: dsnt)
-                    if(temp.getHoTen().contains(s))
+                    if(temp.getHoTen().toUpperCase().contains(s.toUpperCase()))
                         nt.add(temp);
                 break;
             case 3:
@@ -90,7 +90,7 @@ public class NguoiThanBUS {
                 break;
             case 5:
                 for (NguoiThan temp: dsnt)
-                    if(s.equalsIgnoreCase(temp.getNamSinh()))
+                    if(s.equals(temp.getNamSinh()))
                         nt.add(temp);
                 break;
              }
