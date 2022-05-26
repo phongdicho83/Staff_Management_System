@@ -8,6 +8,7 @@ import Helpers.MessageDialogHelper;
 import java.util.ArrayList;
 import staff_management_system.DAO.PhongBanDAO;
 import staff_management_system.DTO.PhongBan;
+import staff_management_system.Helpers.CommonAttribute;
 import staff_management_system.UI.PhongBanUI;
 /**
  *
@@ -17,6 +18,13 @@ public class PhongBanBUS {
      public ArrayList<PhongBan> getPhongBans() throws Exception {
         PhongBanDAO dao = new PhongBanDAO();
         return PhongBanUI.listPhongBan = dao.getPhongBans();
+    }
+    public boolean checkPK(String mapb, String macv){
+        for(PhongBan nv:CommonAttribute.dspb){
+            if(nv.getMaPhongBan().equals(mapb)&&nv.getMaCongViec().equals(macv))
+                return false;
+        }
+        return true;
     }
 
     public boolean addPhongBan(PhongBan phongBan) {
@@ -42,4 +50,5 @@ public class PhongBanBUS {
         }
         return true;
     }
+    
 }
