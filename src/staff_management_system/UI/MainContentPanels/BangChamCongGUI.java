@@ -20,7 +20,6 @@ import staff_management_system.BUS.NhanVienBUS;
 import static staff_management_system.BUS.NhanVienBUS.dsnv;
 import staff_management_system.DTO.BangChamCong;
 import staff_management_system.DTO.NhanVien;
-import staff_management_system.UI.BangChamCongUI;
 
 /**
  *
@@ -262,7 +261,7 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         }
 
         BangChamCongBUS bus = new BangChamCongBUS();
-        if (bus.delChamCong(dscc.get(i).getMaNV())) {
+        if (bus.delChamCong(dscc.get(i))) {
             dscc.remove(i);
             MessageDialogHelper.showMessageDialog(jScrollPane1, "Xóa thông tin chấm công thành công!", "Thông báo");
             readData();

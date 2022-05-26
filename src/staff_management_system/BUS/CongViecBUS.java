@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import staff_management_system.DAO.CongViecDAO;
 import staff_management_system.DTO.CongViec;
-import staff_management_system.UI.CongViecUI;
 /**
  *
  * @author Utech
