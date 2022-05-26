@@ -1,5 +1,7 @@
 package staff_management_system.DAO;
 
+import Helpers.MyConnection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,17 +12,19 @@ import staff_management_system.Helpers.ConnectSql;
 
 public class TangCaDAO {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    ConnectSql con = new ConnectSql("localhost","root","thanhnga","staff_salary_management");
+    ResultSet rs = null;
+    PreparedStatement st = null;
+    MyConnection conn = new MyConnection();
     
     public TangCaDAO(){
     }
     
     public ArrayList docDSTC(){
         ArrayList dstc = new ArrayList<TangCa>();
-        ResultSet rs;
         try {
             String qry = "SELECT * FROM tangca";
-            rs = con.excuteQuery(qry);
+            st = conn.getConnection().prepareStatement(qry);
+            rs = st.executeQuery();
             while(rs.next()){
                 TangCa tc = new TangCa();
                 tc.setMaTC(rs.getString(1));
@@ -29,7 +33,7 @@ public class TangCaDAO {
                 tc.setSoGioTangCa(rs.getString(4));
                 dstc.add(tc);
             }
-            con.Close();
+            conn.closeConnection();
         } catch (Exception ex) {
             Logger.getLogger(TangCaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,8 +44,9 @@ public class TangCaDAO {
         try {
             String s="INSERT INTO tangca VALUES ";
             s+="('"+tc.getMaTC()+"','"+tc.getMaNV()+"','"+sdf.format(tc.getNgayThangNam())+"','"+tc.getSoGioTangCa()+"');";
-            con.executeUpdate(s);
-            con.Close();
+            st = conn.getConnection().prepareStatement(s);
+            st.executeUpdate();
+            conn.closeConnection();
         } catch (Exception ex) {
             Logger.getLogger(TangCaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -54,8 +59,8 @@ public class TangCaDAO {
             String s="UPDATE tangca SET ";
             s+="MaNV='"+tc.getMaNV()+"',NgayThangNam='"+sdf.format(tc.getNgayThangNam())+"',SoGioTangCa='"+tc.getSoGioTangCa();
             s+="' WHERE MATC='"+tc.getMaTC()+"';";
-            con.executeUpdate(s);
-            con.Close();
+            st = conn.getConnection().prepareStatement(s);
+            st.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(TangCaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -66,8 +71,8 @@ public class TangCaDAO {
     public boolean xoaTC(String ma ){
         try {
             String s = "DELETE FROM tangca WHERE MATC='"+ma+"';";
-            con.executeUpdate(s);
-            con.Close();
+            st = conn.getConnection().prepareStatement(s);
+            st.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(TangCaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;

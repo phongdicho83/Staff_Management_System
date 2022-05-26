@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
 import Helpers.MessageDialogHelper;
 import java.text.DateFormat;
@@ -19,8 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import staff_management_system.BUS.CongViecBUS;
 import staff_management_system.DTO.CongViec;
 import staff_management_system.BUS.CongViecBUS;
-import staff_management_system.Helpers.CommonAttribute;
-import static staff_management_system.Helpers.CommonAttribute.dsvc;
+import static staff_management_system.BUS.CongViecBUS.dscv;
 /**
  *
  * @author Chi Thien
@@ -29,15 +28,12 @@ public class CongViecGUI extends javax.swing.JPanel {
     DefaultTableModel model;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
     CongViecBUS bus = new CongViecBUS();
-    public static ArrayList<CongViec> listCongViec;
     /**
      * Creates new form CongViecJP
      */
     public CongViecGUI() {
         readData();
-        loadData(CommonAttribute.dsvc);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        initComponents();
+        loadData(dscv);
     }
 
     /**
@@ -49,9 +45,9 @@ public class CongViecGUI extends javax.swing.JPanel {
      public void readData() {
         CongViecBUS bus = new CongViecBUS();
         try {
-            listCongViec = bus.getCongViecs();
+            bus.getCongViecs();
         } catch (Exception ex) {
-            Logger.getLogger(CongViecUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CongViecGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -215,7 +211,7 @@ public class CongViecGUI extends javax.swing.JPanel {
                     .addComponent(btsua)
                     .addComponent(btxoa)
                     .addComponent(btmoi))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm kiếm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(255, 0, 0))); // NOI18N
@@ -410,7 +406,7 @@ public class CongViecGUI extends javax.swing.JPanel {
             CongViecBUS bus = new CongViecBUS();
             bus.addCongViec(congViec);
             readData();
-            loadData(listCongViec);
+            loadData(dscv);
             btmoiActionPerformed(evt);
 
         } catch (Exception e) {
@@ -441,7 +437,7 @@ public class CongViecGUI extends javax.swing.JPanel {
         if (bus.updateCongViec(congViec)) {
             MessageDialogHelper.showMessageDialog(jLabel1, "Cập nhật thông tin công việc thành công!", "Thông báo");
             readData();
-            loadData(listCongViec);
+            loadData(dscv);
             btmoiActionPerformed(evt);
         } else
             MessageDialogHelper.showErrorDialog(jLabel1, "Cập thông thông tin công việc thất bại", "Lỗi");
@@ -457,11 +453,11 @@ public class CongViecGUI extends javax.swing.JPanel {
         }
         
         CongViecBUS bus = new CongViecBUS();
-        if (bus.delCongViec(listCongViec.get(i).getMaCongViec())) {
-            listCongViec.remove(i);
+        if (bus.delCongViec(dscv.get(i).getMaCongViec())) {
+            dscv.remove(i);
             MessageDialogHelper.showMessageDialog(jLabel1, "Xóa thông tin công việc thành công!", "Thông báo");
             readData();
-            loadData(listCongViec);
+            loadData(dscv);
             btmoiActionPerformed(evt);
         } else {
             MessageDialogHelper.showErrorDialog(jLabel1, "Xóa thông tin công việc không thành công", "Lỗi");

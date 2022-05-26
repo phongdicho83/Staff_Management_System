@@ -5,14 +5,17 @@
 package staff_management_system.BUS;
 
 import Helpers.MessageDialogHelper;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import staff_management_system.DAO.NhanVienDAO;
 import staff_management_system.DTO.NhanVien;
 import staff_management_system.Helpers.CommonAttribute;
-import staff_management_system.UI.NhanVienUI;
-import static staff_management_system.Helpers.CommonAttribute.dsnv;
+import staff_management_system.UI.MainContentPanels.NhanVienGUI;
+//import static staff_management_system.Helpers.CommonAttribute;
 
 /**
  *
@@ -20,11 +23,19 @@ import static staff_management_system.Helpers.CommonAttribute.dsnv;
  */
 public class NhanVienBUS {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static ArrayList<NhanVien> dsnv;
     
-    public ArrayList<NhanVien> getNhanViens() throws Exception {
+    public void getNhanViens() {
         NhanVienDAO dao = new NhanVienDAO();
-        return CommonAttribute.dsnv = dao.getNhanViens();
+        if(dsnv == null)
+            dsnv = new ArrayList<>();
+        try {
+            dsnv = dao.getNhanViens();
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienBUS.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     public boolean checkPK(String manv, String mapb){
         for(NhanVien nv:dsnv){
             if(nv.getMaNV().equals(manv)&&nv.getMaPhongBan().equals(mapb))

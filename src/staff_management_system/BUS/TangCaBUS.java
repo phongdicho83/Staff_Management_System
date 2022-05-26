@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import staff_management_system.DAO.TangCaDAO;
 import staff_management_system.DTO.TangCa;
-import static staff_management_system.Helpers.CommonAttribute.dstc;
 
 public class TangCaBUS {
+    public static ArrayList<TangCa> dstc;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     public TangCaBUS(){

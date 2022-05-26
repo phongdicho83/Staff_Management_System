@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
 import Helpers.MessageDialogHelper;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +19,8 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import staff_management_system.BUS.NhanVienBUS;
 import staff_management_system.DTO.NhanVien;
-import staff_management_system.Helpers.CommonAttribute;
-import static staff_management_system.Helpers.CommonAttribute.dsnv;
+import static staff_management_system.BUS.NhanVienBUS.dsnv;
+//import static staff_management_system.Helpers.CommonAttribute.dsnv;
 
 /**
  *
@@ -35,8 +36,8 @@ public class NhanVienGUI extends javax.swing.JPanel {
     public NhanVienGUI() {
         initComponents();
         readData();
-        loadData(CommonAttribute.dsnv);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        loadData(dsnv);
+        
     }
 
     /**
@@ -366,7 +367,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
                 .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,40 +588,40 @@ public class NhanVienGUI extends javax.swing.JPanel {
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
         NhanVien nhanvien = new NhanVien();
-        if ("".equals(txtMaNhanVien.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền mã nhân viên");
-            txtMaNhanVien.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtHo.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền họ nhân viên");
-            txtHo.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtTen.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền tên nhân viên");
-            txtTen.requestFocus(true);
-            return;
-        }
-        if (null==jDateChooserNgaySinh.getDate()){
-            JOptionPane.showMessageDialog(null, "Chưa điền ngày sinh");
-            jDateChooserNgaySinh.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtSoDienThoai.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền số điện thoại");
-            txtSoDienThoai.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtMaPhongBan.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền mã phòng ban");
-            txtMaPhongBan.requestFocus(true);
-            return;
-        }
-        if (!bus.checkPK(txtMaNhanVien.getText(),txtMaPhongBan.getText())) {
-            JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
-            return;
-        }
+//        if ("".equals(txtMaNhanVien.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền mã nhân viên");
+//            txtMaNhanVien.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtHo.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền họ nhân viên");
+//            txtHo.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtTen.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền tên nhân viên");
+//            txtTen.requestFocus(true);
+//            return;
+//        }
+//        if (null==jDateChooserNgaySinh.getDate()){
+//            JOptionPane.showMessageDialog(null, "Chưa điền ngày sinh");
+//            jDateChooserNgaySinh.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtSoDienThoai.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền số điện thoại");
+//            txtSoDienThoai.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtMaPhongBan.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền mã phòng ban");
+//            txtMaPhongBan.requestFocus(true);
+//            return;
+//        }
+//        if (!bus.checkPK(txtMaNhanVien.getText(),txtMaPhongBan.getText())) {
+//            JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
+//            return;
+//        }
          try {
             NhanVien nhanVien = new NhanVien();
             nhanVien.setMaNV(txtMaNhanVien.getText());
@@ -641,7 +642,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
             NhanVienBUS bus = new NhanVienBUS();
             bus.addNhanVien(nhanVien);
             readData();
-            loadData(CommonAttribute.dsnv);
+            loadData(dsnv);
             btmoiActionPerformed(evt);
 
         } catch (Exception e) {
@@ -691,7 +692,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
         if (bus.updateNhanVien(nhanVien)) {
             MessageDialogHelper.showMessageDialog(jLabel1, "Cập nhật thông tin nhân viên thành công!", "Thông báo");
             readData();
-            loadData(CommonAttribute.dsnv);
+            loadData(dsnv);
             btmoiActionPerformed(evt);
         } else
             MessageDialogHelper.showErrorDialog(jLabel1, "Cập thông thông tin nhân viên thất bại", "Lỗi"); 
@@ -722,11 +723,11 @@ public class NhanVienGUI extends javax.swing.JPanel {
         }
         
         NhanVienBUS bus = new NhanVienBUS();
-        if (bus.delNhanVien(CommonAttribute.dsnv.get(i).getMaNV())) {
-            CommonAttribute.dsnv.remove(i);
+        if (bus.delNhanVien(dsnv.get(i).getMaNV())) {
+            dsnv.remove(i);
             MessageDialogHelper.showMessageDialog(jLabel1, "Xóa thông tin nhân viên thành công!", "Thông báo");
             readData();
-            loadData(CommonAttribute.dsnv);
+            loadData(dsnv);
             btmoiActionPerformed(evt);
         } else {
             MessageDialogHelper.showErrorDialog(jLabel1, "Xóa thông tin nhân viên không thành công", "Lỗi");
@@ -738,7 +739,7 @@ public class NhanVienGUI extends javax.swing.JPanel {
         int i = tblnhanvien.getSelectedRow();
         if (i >= 0) {
             NhanVien nhanvien;
-            nhanvien = CommonAttribute.dsnv.get(i);
+            nhanvien = dsnv.get(i);
             txtMaNhanVien.setText(nhanvien.getMaNV());
             txtHo.setText(nhanvien.getHo());
             txtTen.setText(nhanvien.getTen());
@@ -892,11 +893,10 @@ public class NhanVienGUI extends javax.swing.JPanel {
         loadData(kq);
     }//GEN-LAST:event_jButton2ActionPerformed
     public void readData() {
-        NhanVienBUS bus = new NhanVienBUS();
         try {
-            CommonAttribute.dsnv = bus.getNhanViens();
+            bus.getNhanViens();
         } catch (Exception ex) {
-            Logger.getLogger(NhanVienUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NhanVienGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

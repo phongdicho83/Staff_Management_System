@@ -1,4 +1,4 @@
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -10,8 +10,8 @@ import staff_management_system.BUS.NguoiThanBUS;
 import staff_management_system.BUS.NhanVienBUS;
 import staff_management_system.DTO.NguoiThan;
 import staff_management_system.DTO.NhanVien;
-import static staff_management_system.Helpers.CommonAttribute.dsnt;
-import static staff_management_system.Helpers.CommonAttribute.dsnv;
+import static staff_management_system.BUS.NguoiThanBUS.dsnt;
+import static staff_management_system.BUS.NhanVienBUS.dsnv;
 
 public class NguoiThanGUI extends javax.swing.JPanel {
 
@@ -25,7 +25,7 @@ public class NguoiThanGUI extends javax.swing.JPanel {
             try {
                 busnv.getNhanViens();
             } catch (Exception ex) {
-                Logger.getLogger(NguoiThanUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NguoiThanGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         for (NhanVien nv : dsnv) {

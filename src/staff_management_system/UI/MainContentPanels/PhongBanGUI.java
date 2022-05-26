@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
+import staff_management_system.UI.*;
 import Helpers.MessageDialogHelper;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,12 +18,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import staff_management_system.BUS.CongViecBUS;
 import staff_management_system.BUS.PhongBanBUS;
 import staff_management_system.DTO.PhongBan;
-import staff_management_system.BUS.CongViecBUS;
-import staff_management_system.Helpers.CommonAttribute;
-import static staff_management_system.UI.PhongBanUI.listPhongBan;
+import static staff_management_system.BUS.PhongBanBUS.dspb;
+//import static staff_management_system.Helpers.CommonAttribute.dspb;
+
 
 /**
  *
@@ -30,16 +30,15 @@ import static staff_management_system.UI.PhongBanUI.listPhongBan;
  */
 public class PhongBanGUI extends javax.swing.JPanel {
     DefaultTableModel model;
-    public static ArrayList<PhongBan> listPhongBan;
-    CongViecBUS bus = new CongViecBUS();
+    PhongBanBUS bus = new PhongBanBUS();
+    
     /**
      * Creates new form PhongBanJP
      */
     public PhongBanGUI() {
         initComponents();
         readData();
-        loadData(listPhongBan);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        loadData(dspb);
     }
 
     /**
@@ -87,10 +86,10 @@ public class PhongBanGUI extends javax.swing.JPanel {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(255, 51, 51))); // NOI18N
+        jPanel6.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel6.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 255, 102), 2, true), javax.swing.BorderFactory.createTitledBorder(null, "Thông tin", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 51, 51)))); // NOI18N
 
-        txtMaPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder("Mã phòng ban"));
+        txtMaPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 102), 1, true), "Mã phòng ban", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 0, 0))); // NOI18N
 
         txtTenPhongBan.setBorder(javax.swing.BorderFactory.createTitledBorder("Tên phòng ban"));
 
@@ -219,8 +218,8 @@ public class PhongBanGUI extends javax.swing.JPanel {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jTextField3)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -235,7 +234,7 @@ public class PhongBanGUI extends javax.swing.JPanel {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -353,16 +352,16 @@ public class PhongBanGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 113, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,8 +374,8 @@ public class PhongBanGUI extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -402,11 +401,11 @@ public class PhongBanGUI extends javax.swing.JPanel {
         }
         
         PhongBanBUS bus = new PhongBanBUS();
-        if (bus.delPhongBan(listPhongBan.get(i).getMaPhongBan())) {
-            listPhongBan.remove(i);
+        if (bus.delPhongBan(dspb.get(i).getMaPhongBan())) {
+            dspb.remove(i);
             MessageDialogHelper.showMessageDialog(jPanel1, "Xóa thông tin phòng ban thành công!", "Thông báo");
             readData();
-            loadData(listPhongBan);
+            loadData(dspb);
             btmoiActionPerformed(evt);
         } else {
             MessageDialogHelper.showErrorDialog(jPanel1, "Xóa thông tin phòng ban không thành công", "Lỗi");
@@ -424,10 +423,10 @@ public class PhongBanGUI extends javax.swing.JPanel {
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
     int i = tblphongban.getSelectedRow();
-        txtMaPhongBan.setText(listPhongBan.get(i).getMaPhongBan());
-        txtTenPhongBan.setText(listPhongBan.get(i).getTenPhongBan());
-        txtMaCongViec.setText(listPhongBan.get(i).getMaCongViec());
-        txtDiaChi.setText(listPhongBan.get(i).getDiaChi());
+        txtMaPhongBan.setText(dspb.get(i).getMaPhongBan());
+        txtTenPhongBan.setText(dspb.get(i).getTenPhongBan());
+        txtMaCongViec.setText(dspb.get(i).getMaCongViec());
+        txtDiaChi.setText(dspb.get(i).getDiaChi());
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -436,30 +435,30 @@ public class PhongBanGUI extends javax.swing.JPanel {
 
     private void bthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthemActionPerformed
         // TODO add your handling code here:
-        if ("".equals(txtMaPhongBan.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền mã phòng ban");
-            txtMaPhongBan.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtTenPhongBan.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền tên phòng ban");
-            txtTenPhongBan.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtMaCongViec.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền mã công việc");
-            txtMaCongViec.requestFocus(true);
-            return;
-        }
-        if ("".equals(txtDiaChi.getText())){
-            JOptionPane.showMessageDialog(null, "Chưa điền địa chỉ");
-            txtDiaChi.requestFocus(true);
-            return;
-        }
-        if (!bus.checkPK(txtMaCongViec.getText(),txtMaPhongBan.getText())) {
-            JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
-            return;
-        }
+//        if ("".equals(txtMaPhongBan.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền mã phòng ban");
+//            txtMaPhongBan.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtTenPhongBan.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền tên phòng ban");
+//            txtTenPhongBan.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtMaCongViec.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền mã công việc");
+//            txtMaCongViec.requestFocus(true);
+//            return;
+//        }
+//        if ("".equals(txtDiaChi.getText())){
+//            JOptionPane.showMessageDialog(null, "Chưa điền địa chỉ");
+//            txtDiaChi.requestFocus(true);
+//            return;
+//        }
+//        if (!bus.checkPK(txtMaCongViec.getText(),txtMaPhongBan.getText())) {
+//            JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
+//            return;
+//        }
         try {
             PhongBan phongBan = new PhongBan();
             phongBan.setMaPhongBan(txtMaPhongBan.getText());
@@ -470,7 +469,7 @@ public class PhongBanGUI extends javax.swing.JPanel {
             PhongBanBUS bus = new PhongBanBUS();
             bus.addPhongBan(phongBan);
             readData();
-            loadData(listPhongBan);
+            loadData(dspb);
             btmoiActionPerformed(evt);
 
         } catch (Exception e) {
@@ -497,50 +496,49 @@ public class PhongBanGUI extends javax.swing.JPanel {
         if (bus.updatePhongBan(phongBan)) {
             MessageDialogHelper.showMessageDialog(jPanel1, "Cập nhật thông tin phòng ban thành công!", "Thông báo");
             readData();
-            loadData(listPhongBan);
+            loadData(dspb);
             btmoiActionPerformed(evt);
         } else
             MessageDialogHelper.showErrorDialog(jPanel1, "Cập thông thông tin thất bại", "Lỗi");
     }//GEN-LAST:event_btsuaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    int n=cbTimKiem.getSelectedIndex();
-        ArrayList<PhongBan> kq;
-        switch (n){
-            case 1 :
-                String temp = jTextField3.getText();
-                kq=bus.timKiem1(1,temp);
-                if(kq.isEmpty())
-                    JOptionPane.showMessageDialog(null, "Không có mã phòng ban như vậy");
-                loadData(kq);
-                break;
-
-            case 2 :
-                temp = jTextField3.getText();
-                kq=bus.timKiem1(2,temp);
-                if(kq.isEmpty())
-                    JOptionPane.showMessageDialog(null, "Không có tên phòng ban như vậy");
-                loadData(kq);
-                break;
-            case 3 :
-                temp = jTextField3.getText();
-                kq=bus.timKiem1(2,temp);
-                if(kq.isEmpty())
-                    JOptionPane.showMessageDialog(null, "Không có mã công việc như vậy");
-                loadData(kq);
-                break;
-            case 4 :
-                temp = jTextField3.getText();
-                kq=bus.timKiem1(4,temp);
-                if(kq.isEmpty())
-                    JOptionPane.showMessageDialog(null, "Không có địa chỉ như trên");
-                loadData(kq);
-                break;
-
-            default :
-            break;
-        }
+//        // TODO add your handling code here:
+//    int n=cbTimKiem.getSelectedIndex();
+//        ArrayList<PhongBan> kq;
+//        switch (n){
+//            case 1 :
+//                String temp = jTextField3.getText();
+//                kq=bus.timKiem1(1,temp);
+//                if(kq.isEmpty())
+//                    JOptionPane.showMessageDialog(null, "Không có mã phòng ban như vậy");
+//                loadData(kq);
+//                break;
+//            case 2 :
+//                temp = jTextField3.getText();
+//                kq=bus.timKiem1(2,temp);
+//                if(kq.isEmpty())
+//                    JOptionPane.showMessageDialog(null, "Không có tên phòng ban như vậy");
+//                loadData(kq);
+//                break;
+//            case 3 :
+//                temp = jTextField3.getText();
+//                kq=bus.timKiem1(2,temp);
+//                if(kq.isEmpty())
+//                    JOptionPane.showMessageDialog(null, "Không có mã công việc như vậy");
+//                loadData(kq);
+//                break;
+//            case 4 :
+//                temp = jTextField3.getText();
+//                kq=bus.timKiem1(4,temp);
+//                if(kq.isEmpty())
+//                    JOptionPane.showMessageDialog(null, "Không có địa chỉ như trên");
+//                loadData(kq);
+//                break;
+//
+//            default :
+//            break;
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTimKiemActionPerformed
@@ -556,11 +554,10 @@ public class PhongBanGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbTimKiemActionPerformed
     public void readData() {
-        PhongBanBUS bus = new PhongBanBUS();
         try {
-            listPhongBan = bus.getPhongBans();
+            bus.getPhongBans();
         } catch (Exception ex) {
-            Logger.getLogger(PhongBanUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PhongBanGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
