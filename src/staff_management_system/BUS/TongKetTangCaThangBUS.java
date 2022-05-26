@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import staff_management_system.DAO.TongKetTangCaThangDAO;
 import staff_management_system.DTO.TongKetTangCaThang;
-import static staff_management_system.Helpers.CommonAttribute.dstktct;
 
 public class TongKetTangCaThangBUS {
+    public static ArrayList<TongKetTangCaThang> dstktct;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
     public TongKetTangCaThangBUS() {

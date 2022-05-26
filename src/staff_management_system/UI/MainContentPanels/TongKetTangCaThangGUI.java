@@ -1,5 +1,6 @@
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
+import staff_management_system.UI.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ import staff_management_system.BUS.TongKetTangCaThangBUS;
 import staff_management_system.DTO.NhanVien;
 import staff_management_system.DTO.TangCa;
 import staff_management_system.DTO.TongKetTangCaThang;
-import static staff_management_system.Helpers.CommonAttribute.dsnv;
-import static staff_management_system.Helpers.CommonAttribute.dstc;
-import static staff_management_system.Helpers.CommonAttribute.dstktct;
+import static staff_management_system.BUS.NhanVienBUS.dsnv;
+import static staff_management_system.BUS.TangCaBUS.dstc;
+import static staff_management_system.BUS.TongKetTangCaThangBUS.dstktct;
 
 public class TongKetTangCaThangGUI extends javax.swing.JPanel {
 
@@ -30,13 +31,12 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
         jPanel10.setVisible(false);
         jPanel11.setVisible(false);
         NhanVienBUS busnv = new NhanVienBUS();
-        if (dsnv == null) {
-            try {
-                busnv.getNhanViens();
-            } catch (Exception ex) {
-                Logger.getLogger(TongKetTangCaThangUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            busnv.getNhanViens();
+        } catch (Exception ex) {
+            Logger.getLogger(TongKetTangCaThangGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         for (NhanVien nv : dsnv) {
             cbMaNV.addItem(nv.getMaNV());
         }
@@ -57,10 +57,6 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         cbMaNV = new javax.swing.JComboBox<>();
         txTien = new javax.swing.JTextField();
         cbThang = new javax.swing.JComboBox<>();
@@ -106,47 +102,38 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 3, true), "Thông tin ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel3.setText("Mã NV");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel4.setText("Tháng năm");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel5.setText("Tổng giờ tăng ca");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel6.setText("Số tiền được hưởng");
-
-        cbMaNV.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        cbMaNV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbMaNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã nv" }));
+        cbMaNV.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Mã nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         cbMaNV.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbMaNVItemStateChanged(evt);
             }
         });
 
-        txTien.setEditable(false);
         txTien.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        txTien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số tiền hưởng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        cbThang.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        cbThang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cbThang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         cbThang.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbThangItemStateChanged(evt);
             }
         });
 
-        cbNam.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        cbNam.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cbNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Năm", "2020", "2021", "2022" }));
+        cbNam.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         cbNam.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbNamItemStateChanged(evt);
             }
         });
 
-        txGio.setEditable(false);
         txGio.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        txGio.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 51), 1, true), javax.swing.BorderFactory.createTitledBorder(null, "Số giờ tăng ca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14)))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,41 +142,30 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cbMaNV, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbThang, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)
-                    .addComponent(txTien)
-                    .addComponent(txGio, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(18, 18, 18)
-                .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbThang, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbMaNV, 0, 366, Short.MAX_VALUE)
+                        .addComponent(txGio)
+                        .addComponent(txTien)))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
+                .addComponent(cbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbThang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txGio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(cbNam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbThang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(txGio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         btThem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -548,7 +524,7 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -888,10 +864,6 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

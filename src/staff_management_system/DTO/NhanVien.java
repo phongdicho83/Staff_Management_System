@@ -21,6 +21,15 @@ public class NhanVien {
     private String MaPhongBan;
     private String MaChucVu;
     private Date NgaySinh;
+    private Date NgayVaoLam;
+
+    public Date getNgayVaoLam() {
+        return NgayVaoLam;
+    }
+
+    public void setNgayVaoLam(Date NgayVaoLam) {
+        this.NgayVaoLam = NgayVaoLam;
+    }
 
     public NhanVien(){      
     }

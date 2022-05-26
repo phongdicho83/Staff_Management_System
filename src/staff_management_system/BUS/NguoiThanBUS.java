@@ -3,10 +3,10 @@ package staff_management_system.BUS;
 import java.util.ArrayList;
 import staff_management_system.DAO.NguoiThanDAO;
 import staff_management_system.DTO.NguoiThan;
-import static staff_management_system.Helpers.CommonAttribute.dsnt;
+
 
 public class NguoiThanBUS {
-    
+    public static ArrayList<NguoiThan> dsnt;
     public NguoiThanBUS(){
     }
     

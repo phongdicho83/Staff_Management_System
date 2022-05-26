@@ -1,4 +1,4 @@
-package staff_management_system.UI;
+package staff_management_system.UI.MainContentPanels;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import staff_management_system.BUS.NhanVienBUS;
 import staff_management_system.BUS.TangCaBUS;
 import staff_management_system.DTO.NhanVien;
 import staff_management_system.DTO.TangCa;
-import static staff_management_system.Helpers.CommonAttribute.dsnv;
-import static staff_management_system.Helpers.CommonAttribute.dstc;
+import static staff_management_system.BUS.NhanVienBUS.dsnv;
+import static staff_management_system.BUS.TangCaBUS.dstc;
 
 public class TangCaGUI extends javax.swing.JPanel {
 
@@ -27,7 +27,7 @@ public class TangCaGUI extends javax.swing.JPanel {
             try {
                 busnv.getNhanViens();
             } catch (Exception ex) {
-                Logger.getLogger(TangCaUI.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TangCaGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         for (NhanVien nv : dsnv) {

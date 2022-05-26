@@ -5,20 +5,30 @@
 package staff_management_system.BUS;
 
 import Helpers.MessageDialogHelper;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import staff_management_system.DAO.BangChamCongDAO;
 import staff_management_system.DTO.BangChamCong;
-import staff_management_system.UI.BangChamCongUI;
+
 
 /**
  *
  * @author Utech
  */
 public class BangChamCongBUS {
+    public static ArrayList<BangChamCong> dscc;
 
-    public ArrayList<BangChamCong> getBangChamCongs() throws Exception {
+    public void getBangChamCongs() {
         BangChamCongDAO dao = new BangChamCongDAO();
-        return BangChamCongUI.listChamCong = dao.getBangChamCongs();
+        if(dscc ==  null)
+            dscc = new ArrayList<>();
+        try {
+            dscc = dao.getBangChamCongs();
+        } catch (SQLException ex) {
+            Logger.getLogger(BangChamCongBUS.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public boolean addChamCong(BangChamCong chamCong) {
