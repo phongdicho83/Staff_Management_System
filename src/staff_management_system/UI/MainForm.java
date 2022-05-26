@@ -22,7 +22,7 @@ public class MainForm extends javax.swing.JFrame {
         setTitle("QUẢN LÝ NHÂN SỰ");
         
         ChangeController controller = new ChangeController(pnView);
-//        controller.setView(pnNhanVien, lbNhanVien);
+        controller.setView(pnNhanVien, lbNhanVien);
         
         ArrayList<DanhMuc> listItem = new ArrayList<>();
         listItem.add(new DanhMuc("nhanvien", pnNhanVien, lbNhanVien));

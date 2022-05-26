@@ -29,7 +29,6 @@ public class BangChamCongGUI extends javax.swing.JPanel {
     BangChamCongBUS bus = new BangChamCongBUS();
     DefaultTableModel model;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
-    int count = 0;
 
     /**
      * Creates new form BangChamCongGUI
@@ -39,8 +38,6 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         cbTrangThai.setSelectedItem(null);
         readData();
         
-        for(BangChamCong cc : dscc)
-            count++;
         
         NhanVienBUS nvbus = new NhanVienBUS();
         nvbus.getNhanViens();
@@ -55,7 +52,7 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         try {
             bus.getBangChamCongs();
         } catch (Exception ex) {
-            Logger.getLogger(BangChamCongUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BangChamCongGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
