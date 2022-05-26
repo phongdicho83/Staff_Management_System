@@ -420,18 +420,6 @@ public class TangCaGUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean check(){
-        if ("".equals(txMaTC.getText()))
-            return false;
-        if(cbMaNV.getSelectedIndex()==0)
-            return false;
-        if(jDateChooser1.getDate()==null)
-            return false;
-        if("0".equals(spnSoGioTangCa.getValue()+""))
-            return false;
-        return true;
-    }
-    
     private void ganDS(ArrayList <TangCa> ds) {
         Vector header = new Vector();
         header.add("Mã tăng ca");
