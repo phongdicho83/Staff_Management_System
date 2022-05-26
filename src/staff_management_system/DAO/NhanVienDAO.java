@@ -20,7 +20,7 @@ import staff_management_system.DTO.NhanVien;
  */
 public class NhanVienDAO {
 
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     ResultSet rs = null;
     PreparedStatement st = null;
@@ -38,11 +38,11 @@ public class NhanVienDAO {
                 nhanVien.setMaNV(rs.getString(1));
                 nhanVien.setHo(rs.getString(2));
                 nhanVien.setTen(rs.getString(3));
-                nhanVien.setNgaySinh(formatter.parse(rs.getString(4)));
+                nhanVien.setNgaySinh(sdf.parse(rs.getString(4)));
                 nhanVien.setSoDienThoai(rs.getString(5));
                 nhanVien.setGioiTinh(rs.getString(6));
                 nhanVien.setMaPhongBan(rs.getString(7));
-                nhanVien.setMaChucVu(rs.getString(8));
+                nhanVien.setNgayVaoLam(sdf.parse(rs.getString(8)));
                 list.add(nhanVien);
             }
             conn.closeConnection();
@@ -53,7 +53,7 @@ public class NhanVienDAO {
     }
 
     public boolean addNhanVien(NhanVien nhanvien) {
-        String date = formatter.format(nhanvien.getNgaySinh());
+        String date = sdf.format(nhanvien.getNgaySinh());
         try {
             String qry = "INSERT INTO `nhanvien` (`MaNV`, `Ho`, `Ten`, `NgaySinh`, `SoDienThoai`, `GioiTinh`, `MaPhongBan`, `MaChucVu`) VALUES (";
             qry += "'" + nhanvien.getMaNV()+ "'";
@@ -63,7 +63,7 @@ public class NhanVienDAO {
             qry += ",'" + nhanvien.getSoDienThoai()+ "'";
             qry += ",'" + nhanvien.getGioiTinh()+ "'";
             qry += ",'" + nhanvien.getMaPhongBan()+ "'";
-            qry += ",'" + nhanvien.getMaChucVu() + "');";
+            qry += ",'" + nhanvien.getNgayVaoLam()+ "');";
 
             st = conn.getConnection().prepareStatement(qry);
             st.executeUpdate();
@@ -86,16 +86,17 @@ public class NhanVienDAO {
         return false;
     }
 
+
     public boolean updateNhanVien(NhanVien nhanVien) {
         try {
             String qry = "update `nhanvien` set ";
             qry += "ho =" + "'" + nhanVien.getHo()+ "'";
             qry += ",ten =" + "'" + nhanVien.getTen()+ "'";
-            qry += ",ngaysinh =" + "'" + formatter.format(nhanVien.getNgaySinh()) + "'";
+            qry += ",ngaysinh =" + "'" + sdf.format(nhanVien.getNgaySinh()) + "'";
             qry += ",sodienthoai =" + "'" + nhanVien.getSoDienThoai()+ "'";
             qry += ",gioitinh =" + "'" + nhanVien.getGioiTinh()+ "'";
             qry += ",maphongban =" + "'" + nhanVien.getMaPhongBan()+ "'";
-            qry += ",machucvu =" + "'" + nhanVien.getMaChucVu()+ "'";
+            qry += ",ngayvaolam =" + "'" + nhanVien.getNgayVaoLam()+ "'";
             qry += " where manv = " + "'" + nhanVien.getMaNV() + "'";
 
             st = conn.getConnection().prepareStatement(qry);
@@ -105,5 +106,7 @@ public class NhanVienDAO {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }   
     }
-}
+
+
