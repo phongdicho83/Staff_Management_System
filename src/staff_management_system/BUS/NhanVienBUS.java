@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import staff_management_system.DAO.NhanVienDAO;
 import staff_management_system.DTO.NhanVien;
-import staff_management_system.Helpers.CommonAttribute;
 import staff_management_system.UI.MainContentPanels.NhanVienGUI;
 //import static staff_management_system.Helpers.CommonAttribute;
 

@@ -39,9 +39,9 @@ public class BangChamCongBUS {
         return false;
     }
 
-    public boolean delChamCong(String MaChamCong) {
+    public boolean delChamCong(BangChamCong cC) {
         BangChamCongDAO dao = new BangChamCongDAO();
-        if (!dao.delChamCong(MaChamCong)) {
+        if (!dao.delChamCong(cC.getMaNV(), cC.getDate())) {
             return false;
         }
         return true;

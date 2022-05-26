@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package staff_management_system.Helpers;
+package staff_management_system.UI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import staff_management_system.Helpers.DanhMuc;
+import staff_management_system.UI.DanhMuc;
 import staff_management_system.UI.MainContentPanels.BangChamCongGUI;
 import staff_management_system.UI.MainContentPanels.CongViecGUI;
 import staff_management_system.UI.MainContentPanels.NguoiThanGUI;

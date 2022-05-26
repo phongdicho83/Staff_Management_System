@@ -20,7 +20,6 @@ import staff_management_system.BUS.NhanVienBUS;
 import static staff_management_system.BUS.NhanVienBUS.dsnv;
 import staff_management_system.DTO.BangChamCong;
 import staff_management_system.DTO.NhanVien;
-import staff_management_system.UI.BangChamCongUI;
 
 /**
  *
@@ -30,7 +29,6 @@ public class BangChamCongGUI extends javax.swing.JPanel {
     BangChamCongBUS bus = new BangChamCongBUS();
     DefaultTableModel model;
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
-    int count = 0;
 
     /**
      * Creates new form BangChamCongGUI
@@ -40,8 +38,6 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         cbTrangThai.setSelectedItem(null);
         readData();
         
-        for(BangChamCong cc : dscc)
-            count++;
         
         NhanVienBUS nvbus = new NhanVienBUS();
         nvbus.getNhanViens();
@@ -56,7 +52,7 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         try {
             bus.getBangChamCongs();
         } catch (Exception ex) {
-            Logger.getLogger(BangChamCongUI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BangChamCongGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -262,7 +258,7 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         }
 
         BangChamCongBUS bus = new BangChamCongBUS();
-        if (bus.delChamCong(dscc.get(i).getMaNV())) {
+        if (bus.delChamCong(dscc.get(i))) {
             dscc.remove(i);
             MessageDialogHelper.showMessageDialog(jScrollPane1, "Xóa thông tin chấm công thành công!", "Thông báo");
             readData();

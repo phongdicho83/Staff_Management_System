@@ -5,8 +5,6 @@
 package staff_management_system.UI;
 
 import java.util.ArrayList;
-import staff_management_system.Helpers.ChangeController;
-import staff_management_system.Helpers.DanhMuc;
 
 /**
  *
@@ -22,7 +20,7 @@ public class MainForm extends javax.swing.JFrame {
         setTitle("QUẢN LÝ NHÂN SỰ");
         
         ChangeController controller = new ChangeController(pnView);
-//        controller.setView(pnNhanVien, lbNhanVien);
+        controller.setView(pnNhanVien, lbNhanVien);
         
         ArrayList<DanhMuc> listItem = new ArrayList<>();
         listItem.add(new DanhMuc("nhanvien", pnNhanVien, lbNhanVien));
