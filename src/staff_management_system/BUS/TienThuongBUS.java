@@ -15,9 +15,11 @@ import staff_management_system.UI.TienThuongUI;
  * @author Nguyen Anh Quang
  */
 public class TienThuongBUS {
+    public static ArrayList<TienThuongDTO> dstt = new ArrayList<>();
+    
      public ArrayList<TienThuongDTO> getTienThuongs() throws Exception {
         TienThuongDAO dao = new TienThuongDAO();
-        return TienThuongUI.list = dao.getTienThuongs();
+        return dstt = dao.getTienThuongs();
     }
 
     public boolean addCongViec(TienThuongDTO tienthuong) {
