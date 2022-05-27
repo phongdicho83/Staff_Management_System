@@ -12,14 +12,13 @@ import java.util.Objects;
  * @author Utech
  */
 public class BangChamCong {
-    private String MaChamCong, MaNV, TrangThai;
+    private String MaNV, TrangThai;
     private Date date;
 
     public BangChamCong() {
     }
 
-    public BangChamCong(String MaChamCong, String MaNV, String TrangThai, Date date) {
-        this.MaChamCong = MaChamCong;
+    public BangChamCong(String MaNV, String TrangThai, Date date) {
         this.MaNV = MaNV;
         this.TrangThai = TrangThai;
         this.date = date;
@@ -31,36 +30,7 @@ public class BangChamCong {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final BangChamCong other = (BangChamCong) obj;
-        if (!Objects.equals(this.MaChamCong, other.MaChamCong)) {
-            return false;
-        }
-        if (!Objects.equals(this.MaNV, other.MaNV)) {
-            return false;
-        }
-        if (!Objects.equals(this.TrangThai, other.TrangThai)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        return true;
-    }
-
-    public String getMaChamCong() {
-        return MaChamCong;
-    }
+ 
 
     public String getMaNV() {
         return MaNV;
@@ -72,10 +42,6 @@ public class BangChamCong {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setMaChamCong(String MaChamCong) {
-        this.MaChamCong = MaChamCong;
     }
 
     public void setMaNV(String MaNV) {

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import staff_management_system.DTO.BangChamCong;
@@ -35,10 +36,9 @@ public class BangChamCongDAO {
 
             while (rs.next()) {
                 BangChamCong bangChamCong = new BangChamCong();
-                bangChamCong.setMaChamCong(rs.getString(1));
-                bangChamCong.setMaNV(rs.getString(2));
-                bangChamCong.setDate(formatter.parse(rs.getString(3)));
-                bangChamCong.setTrangThai(rs.getString(4));
+                bangChamCong.setMaNV(rs.getString(1));
+                bangChamCong.setDate(formatter.parse(rs.getString(2)));
+                bangChamCong.setTrangThai(rs.getString(3));
                 list.add(bangChamCong);
             }
             conn.closeConnection();
@@ -49,12 +49,10 @@ public class BangChamCongDAO {
     }
 
     public boolean addChamCong(BangChamCong chamcong) {
-        String date = formatter.format(chamcong.getDate());
         try {
-            String qry = "INSERT INTO `bangchamcong` (`MaChamCong`, `MaNV`, `NgayThangNam`, `TrangThai`) VALUES (";
-            qry += "'" + chamcong.getMaChamCong() + "'";
-            qry += ",'" + chamcong.getMaNV() + "'";
-            qry += ",'" + date + "'";
+            String qry = "INSERT INTO `bangchamcong` (`MaNV`, `NgayThangNam`, `TrangThai`) VALUES (";
+            qry += "'" + chamcong.getMaNV() + "'";
+            qry += ",'" + formatter.format(chamcong.getDate()) + "'";
             qry += ",'" + chamcong.getTrangThai() + "');";
 
             st = conn.getConnection().prepareStatement(qry);
@@ -66,9 +64,9 @@ public class BangChamCongDAO {
         return false;
     }
 
-    public boolean delChamCong(String MaChamCong) {
+    public boolean delChamCong(String manv, Date ngay) {
         try {
-            String qry = "delete from `bangchamcong` where machamcong = '" + MaChamCong + "'";
+            String qry = "delete from `bangchamcong` where manv = '" + manv + "' and ngaythangnam =" +  ngay + "'";
             st = conn.getConnection().prepareStatement(qry);
             st.executeUpdate();
             return true;
@@ -81,10 +79,9 @@ public class BangChamCongDAO {
     public boolean updateChamCong(BangChamCong chamCong) {
         try {
             String qry = "update `bangchamcong` set ";
-            qry += "manv =" + "'" + chamCong.getMaNV() + "'";
-            qry += ",ngaythangnam =" + "'" + formatter.format(chamCong.getDate()) + "'";
-            qry += ",trangthai =" + "'" + chamCong.getTrangThai() + "'";
-            qry += " where machamcong = " + "'" + chamCong.getMaChamCong() + "'";
+            qry += "trangthai =" + "'" + chamCong.getTrangThai() + "'";
+            qry += " where manv = " + "'" + chamCong.getMaNV()
+                    + "' and ngaythangnam = " + "'" + formatter.format(chamCong.getDate()) + "'";
 
             st = conn.getConnection().prepareStatement(qry);
             st.executeUpdate();
