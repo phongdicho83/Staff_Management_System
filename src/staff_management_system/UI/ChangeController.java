@@ -17,6 +17,7 @@ import staff_management_system.UI.MainContentPanels.CongViecGUI;
 import staff_management_system.UI.MainContentPanels.NguoiThanGUI;
 import staff_management_system.UI.MainContentPanels.NhanVienGUI;
 import staff_management_system.UI.MainContentPanels.PhongBanGUI;
+import staff_management_system.UI.MainContentPanels.PhuCapGUI;
 import staff_management_system.UI.MainContentPanels.TangCaGUI;
 import staff_management_system.UI.MainContentPanels.TongKetTangCaThangGUI;
 
@@ -99,9 +100,9 @@ public class ChangeController {
 //                case "tienthuong" :
 //                    node = new TienThuongGUI();
 //                    break;
-//                case "phucap" :
-//                    node = new PhuCapGUI();
-//                    break;
+                case "phucap" :
+                    node = new PhuCapGUI();
+                    break;
 //                case "bangluongthang" :
 //                    node = new BangLuongThangGUI();
 //                    break;
