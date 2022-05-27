@@ -20,6 +20,7 @@ import staff_management_system.UI.MainContentPanels.PhongBanGUI;
 import staff_management_system.UI.MainContentPanels.PhuCapGUI;
 import staff_management_system.UI.MainContentPanels.TangCaGUI;
 import staff_management_system.UI.MainContentPanels.TienThuongGUI;
+import staff_management_system.UI.MainContentPanels.TongKetChamCongThangGUI;
 import staff_management_system.UI.MainContentPanels.TongKetTangCaThangGUI;
 
 /**
@@ -68,8 +69,6 @@ public class ChangeController {
             this.jpnItem = jpnItem;
             this.jlbItem = jlbItem;
         }
-
-        
         
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -95,9 +94,9 @@ public class ChangeController {
                 case "bangchamcong" :
                     node = new BangChamCongGUI();
                     break;
-//                case "tongketchamcong" :
-//                    node = new TongKetChamCongGUI();
-//                    break;
+                case "tongketchamcong" :
+                    node = new TongKetChamCongThangGUI();
+                    break;
                 case "tienthuong" :
                     node = new TienThuongGUI();
                     break;
