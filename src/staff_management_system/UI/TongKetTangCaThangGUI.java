@@ -71,7 +71,6 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         btMoi = new javax.swing.JButton();
-        btTimKiem = new javax.swing.JButton();
         btThongKe = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -224,9 +223,6 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
             }
         });
 
-        btTimKiem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        btTimKiem.setText("Tìm Kiếm");
-
         btThongKe.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btThongKe.setText("Thống Kê");
 
@@ -239,14 +235,13 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
         jPanel4Layout.setVerticalGroup(
@@ -260,9 +255,7 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSua)
                     .addComponent(btXoa))
-                .addGap(18, 18, 18)
-                .addComponent(btTimKiem)
-                .addGap(18, 18, 18)
+                .addGap(65, 65, 65)
                 .addComponent(btThongKe)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -687,18 +680,23 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        int i = jTable1.getSelectedRow();
+        int i = JOptionPane.showConfirmDialog(null, "Xác nhận sửa ", "", JOptionPane.YES_NO_OPTION);
+        if (i == 1) {
+            return;
+        }
+        
+        i = jTable1.getSelectedRow();
 
         if (i >= 0) {
-            if (!bus.checkPK(cbMaNV.getSelectedItem() + "", cbThang.getSelectedItem()+"-"+cbNam.getSelectedItem())) {
-                JOptionPane.showMessageDialog(null, "Thông tin bị trùng");
-                return;
-            }
+//            if (!bus.checkPK(cbMaNV.getSelectedItem() + "", cbThang.getSelectedItem()+"-"+cbNam.getSelectedItem())) {
+//                JOptionPane.showMessageDialog(null, "Thông tin bị trùng");
+//                return;
+//            }
             TongKetTangCaThang tktct = new TongKetTangCaThang();
             tktct.setMaNV(cbMaNV.getSelectedItem() + "");
             tktct.setThangNam(cbThang.getSelectedItem()+"-"+cbNam.getSelectedItem());
             tktct.setTongGioTangCa(txGio.getText());
-            tktct.setSoTienDuocHuong(txTien.getText());
+            tktct.setSoTienDuocHuong(txTien.getText().replaceAll("\\.", ""));
             bus.suaTKTCT(tktct);
 
             model.setValueAt(tktct.getMaNV(), i, 0);
@@ -710,7 +708,11 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        int i = jTable1.getSelectedRow();
+        int i = JOptionPane.showConfirmDialog(null, "Xác nhận xóa ", "", JOptionPane.YES_NO_OPTION);
+        if (i == 1) {
+            return;
+        }
+        i = jTable1.getSelectedRow();
         if (i >= 0) {
             bus.xoaTKTCT(i);
             model.removeRow(i);
@@ -824,6 +826,10 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(jComboBox1.getSelectedIndex()==0||jComboBox2.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "chưa điền đủ thông tin");
+            return;
+        }
         ArrayList<TongKetTangCaThang> kq;
         String temp = jComboBox1.getSelectedItem()+"-"+jComboBox2.getSelectedItem();
         kq=bus.timKiem1(2,temp);
@@ -833,6 +839,10 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(jComboBox3.getSelectedIndex()==0||jComboBox4.getSelectedIndex()==0||jComboBox5.getSelectedIndex()==0||jComboBox6.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "chưa điền đủ thông tin");
+            return;
+        }
         try {
             ArrayList<TongKetTangCaThang> kq;
             String temp1 = jComboBox3.getSelectedItem()+"-"+jComboBox4.getSelectedItem();
@@ -869,7 +879,6 @@ public class TongKetTangCaThangGUI extends javax.swing.JPanel {
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btThongKe;
-    private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbMaNV;
     private javax.swing.JComboBox<String> cbNam;

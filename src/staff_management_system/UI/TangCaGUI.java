@@ -491,10 +491,10 @@ public class TangCaGUI extends javax.swing.JPanel {
         i = jTable1.getSelectedRow();
 
         if (i >= 0) {
-            if (!bus.checkPK(txMaTC.getText(), cbMaNV.getSelectedItem() + "", jDateChooser1.getDate())) {
-                JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
-                return;
-            }
+//            if (!bus.checkPK(txMaTC.getText(), cbMaNV.getSelectedItem() + "", jDateChooser1.getDate())) {
+//                JOptionPane.showMessageDialog(null, "Mã số này đã tồn tại");
+//                return;
+//            }
             TangCa tc = new TangCa();
             tc.setMaTC(txMaTC.getText());
             tc.setMaNV(cbMaNV.getSelectedItem() + "");
