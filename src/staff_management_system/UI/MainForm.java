@@ -38,6 +38,7 @@ public class MainForm extends javax.swing.JFrame {
         
         controller.setEvent(listItem);
         
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
