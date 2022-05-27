@@ -293,7 +293,7 @@ public class TangCaGUI extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("hoac");
+        jLabel7.setText("hoặc");
 
         jLabel8.setText("Tu");
 
