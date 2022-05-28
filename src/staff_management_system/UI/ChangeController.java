@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import staff_management_system.UI.DanhMuc;
 import staff_management_system.UI.MainContentPanels.BangChamCongGUI;
 import staff_management_system.UI.MainContentPanels.CongViecGUI;
+import staff_management_system.UI.MainContentPanels.LuongThangGUI;
 import staff_management_system.UI.MainContentPanels.NguoiThanGUI;
 import staff_management_system.UI.MainContentPanels.NhanVienGUI;
 import staff_management_system.UI.MainContentPanels.PhongBanGUI;
@@ -103,9 +104,9 @@ public class ChangeController {
                 case "phucap" :
                     node = new PhuCapGUI();
                     break;
-//                case "bangluongthang" :
-//                    node = new BangLuongThangGUI();
-//                    break;
+                case "bangluongthang" :
+                    node = new LuongThangGUI();
+                    break;
 //                case "theodoitangluong" :
 //                    node = new TheoDoiTangLuongGUI();
 //                    break;
