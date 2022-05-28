@@ -14,12 +14,15 @@ import javax.swing.JPanel;
 import staff_management_system.UI.DanhMuc;
 import staff_management_system.UI.MainContentPanels.BangChamCongGUI;
 import staff_management_system.UI.MainContentPanels.CongViecGUI;
+import staff_management_system.UI.MainContentPanels.LuongThangGUI;
 import staff_management_system.UI.MainContentPanels.NguoiThanGUI;
 import staff_management_system.UI.MainContentPanels.NhanVienGUI;
 import staff_management_system.UI.MainContentPanels.PhongBanGUI;
 import staff_management_system.UI.MainContentPanels.PhuCapGUI;
 import staff_management_system.UI.MainContentPanels.TangCaGUI;
+import staff_management_system.UI.MainContentPanels.TheoDoiTangLuongGUI;
 import staff_management_system.UI.MainContentPanels.TienThuongGUI;
+import staff_management_system.UI.MainContentPanels.TongKetChamCongThangGUI;
 import staff_management_system.UI.MainContentPanels.TongKetTangCaThangGUI;
 
 /**
@@ -68,8 +71,6 @@ public class ChangeController {
             this.jpnItem = jpnItem;
             this.jlbItem = jlbItem;
         }
-
-        
         
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -95,21 +96,21 @@ public class ChangeController {
                 case "bangchamcong" :
                     node = new BangChamCongGUI();
                     break;
-//                case "tongketchamcong" :
-//                    node = new TongKetChamCongGUI();
-//                    break;
+                case "tongketchamcong" :
+                    node = new TongKetChamCongThangGUI();
+                    break;
                 case "tienthuong" :
                     node = new TienThuongGUI();
                     break;
                 case "phucap" :
                     node = new PhuCapGUI();
                     break;
-//                case "bangluongthang" :
-//                    node = new BangLuongThangGUI();
-//                    break;
-//                case "theodoitangluong" :
-//                    node = new TheoDoiTangLuongGUI();
-//                    break;
+                case "bangluongthang" :
+                    node = new LuongThangGUI();
+                    break;
+                case "theodoitangluong" :
+                    node = new TheoDoiTangLuongGUI();
+                    break;
                     
             }
             root.removeAll();
