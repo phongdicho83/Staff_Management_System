@@ -8,7 +8,7 @@ import staff_management_system.DTO.TongKetTangCaThang;
 import staff_management_system.Helpers.ConnectSql;
 
 public class TongKetTangCaThangDAO {
-    ConnectSql con = new ConnectSql("localhost","root","","staff_salary_management");
+    ConnectSql con = new ConnectSql("localhost","root","thanhnga","staff_salary_management");
 
     public TongKetTangCaThangDAO() {
     }

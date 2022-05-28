@@ -1,114 +1,77 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package staff_management_system.DAO;
 
-import Helpers.MyConnection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import staff_management_system.DTO.NhanVien;
-import staff_management_system.DTO.TheoDoiTangLuongDTO;
+import staff_management_system.DTO.TheoDoiTangLuong;
+import staff_management_system.Helpers.ConnectSql;
 
-/**
- *
- * @author Nguyen Anh Quang
- */
 public class TheoDoiTangLuongDAO {
-     ResultSet rs = null;
-    PreparedStatement st = null;
-    MyConnection conn = new MyConnection();
-
-    public ArrayList<TheoDoiTangLuongDTO> getListTangLuongs() throws SQLException {
-        ArrayList<TheoDoiTangLuongDTO> list = new ArrayList<>();
-        String qry = "select * from theodoitangluong";
-        try {
-            st = conn.getConnection().prepareStatement(qry);
-            rs = st.executeQuery();
-
-            while (rs.next()) {
-                TheoDoiTangLuongDTO item = new TheoDoiTangLuongDTO();
-                item.setMaNV(rs.getString(1));
-                item.setSoNgayLam(Integer.valueOf(rs.getString(2)));
-                 item.setTang(Integer.valueOf(rs.getString(3)));
-                  item.setLuongTang(Integer.valueOf(rs.getString(4)));
-                list.add(item);
-            }
-            conn.closeConnection();
-        } catch (NumberFormatException | SQLException e) {
-            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return list;
-    }
-
-    public boolean addTheoDoiLuong(TheoDoiTangLuongDTO item) {
-        try {
-            String qry = "INSERT INTO `theodoitangluong` (`MaNV`, `SoNgayLam`,`Tang`,`LuongTang`) VALUES (";
-              qry += "'" + item.getMaNV()+ "'";
-            qry += ",'" + item.getSoNgayLam()+ "'";
-            qry += ",'" + item.getTang()+ "'";
-            qry += ",'" + item.getLuongTang()+ "');";
-            
-            st = conn.getConnection().prepareStatement(qry);
-            st.executeUpdate(qry);
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    public boolean delTheoDoi(String MaNV) {
-        try {
-            String qry = "delete from `theodoitangluong` where MaNV = '" + MaNV + "'";
-            st = conn.getConnection().prepareStatement(qry);
-            st.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    public boolean updateTheoDoi(TheoDoiTangLuongDTO item) {
-        try {
-            String qry = "update `theodoitangluong` set ";
-             qry += "SoNgayLam =" + "'" + item.getSoNgayLam()+ "'";
-            qry += ",Tang = " + item.getTang();
-            qry += ",LuongTang =" + item.getLuongTang();
-            qry += " where MaNV = " + "'" + item.getMaNV()+ "'";
-
-            st = conn.getConnection().prepareStatement(qry);
-            st.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    ConnectSql con = new ConnectSql("localhost","root","thanhnga","staff_salary_management");
+    
+    public TheoDoiTangLuongDAO(){
     }
     
-     public boolean checkMaNhanVien(String manv) {
-        ArrayList<NhanVien> list = new ArrayList<>();
-        String qry = "select * from NhanVien  where MaNV = '" + manv + "'";
+    public ArrayList docDSTDTL(){
+        ArrayList dstdtl = new ArrayList<TheoDoiTangLuong>();
+        ResultSet rs;
         try {
-            st = conn.getConnection().prepareStatement(qry);
-            rs = st.executeQuery();
-
-            while (rs.next()) {
-                NhanVien item = new NhanVien();
-                item.setMaNV(rs.getString(1));
-                
-                list.add(item);
+            String qry = "SELECT * FROM theodoitangluong";
+            rs = con.excuteQuery(qry);
+            while(rs.next()){
+                TheoDoiTangLuong tdtl = new TheoDoiTangLuong();
+                tdtl.setMaNV(rs.getString(1));
+                tdtl.setSoNgayLam(rs.getString(2));
+                tdtl.setNgayTangLuong(sdf.parse(rs.getString(3)));
+                tdtl.setLuongHienHanh(rs.getString(4));
+                dstdtl.add(tdtl);
             }
-            conn.closeConnection();
-        } catch (NumberFormatException | SQLException e) {
-            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, e);
+            con.Close();
+        } catch (Exception ex) {
+            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list.isEmpty();
+        return dstdtl;
+    }
+    
+    public boolean themTDTL(TheoDoiTangLuong tdtl){
+        try {
+            String s="INSERT INTO theodoitangluong VALUES ";
+            s+="('"+tdtl.getMaNV()+"','"+tdtl.getSoNgayLam()+"','"+sdf.format(tdtl.getNgayTangLuong())+"','"+tdtl.getLuongHienHanh()+"');";
+            con.executeUpdate(s);
+            con.Close();
+        } catch (Exception ex) {
+            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean suaTDTL(TheoDoiTangLuong tdtl){
+        try {
+            String s="UPDATE theodoitangluong SET ";
+            s+="SoNgayLam='"+tdtl.getSoNgayLam()+"',LuongHienHanh='"+tdtl.getLuongHienHanh();
+            s+="' WHERE MaNV='"+tdtl.getMaNV()+"' AND NgayTangLuong='"+sdf.format(tdtl.getNgayTangLuong())+"';";
+            con.executeUpdate(s);
+            con.Close();
+        } catch (Exception ex) {
+            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean xoaTDTL(String ma, String ngaythangnam){
+        try {
+            String s = "DELETE FROM theodoitangluong WHERE MaNV='"+ma+"' AND NgayTangLuong='"+ngaythangnam+"';";
+            con.executeUpdate(s);
+            con.Close();
+        } catch (Exception ex) {
+            Logger.getLogger(TheoDoiTangLuongDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
 }

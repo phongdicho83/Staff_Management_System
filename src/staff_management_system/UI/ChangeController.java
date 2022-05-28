@@ -20,6 +20,7 @@ import staff_management_system.UI.MainContentPanels.NhanVienGUI;
 import staff_management_system.UI.MainContentPanels.PhongBanGUI;
 import staff_management_system.UI.MainContentPanels.PhuCapGUI;
 import staff_management_system.UI.MainContentPanels.TangCaGUI;
+import staff_management_system.UI.MainContentPanels.TheoDoiTangLuongGUI;
 import staff_management_system.UI.MainContentPanels.TienThuongGUI;
 import staff_management_system.UI.MainContentPanels.TongKetChamCongThangGUI;
 import staff_management_system.UI.MainContentPanels.TongKetTangCaThangGUI;
@@ -107,9 +108,9 @@ public class ChangeController {
                 case "bangluongthang" :
                     node = new LuongThangGUI();
                     break;
-//                case "theodoitangluong" :
-//                    node = new TheoDoiTangLuongGUI();
-//                    break;
+                case "theodoitangluong" :
+                    node = new TheoDoiTangLuongGUI();
+                    break;
                     
             }
             root.removeAll();
