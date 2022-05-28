@@ -90,4 +90,52 @@ public class TienThuongDAO {
         }
         return false;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public boolean abc(TienThuongDTO tienThuong) {
+        try{
+            String qry = "update tienthuong set";
+            qry += " tentienthuong = '" + tienThuong.getTenTienThuong() + "'";
+            qry += ", sotienthuong = '" + tienThuong.getTienThuong() + "'";
+            qry += ", thang = '" + tienThuong.getThang() + "'";
+            qry += " where matienthuong = '" + tienThuong.getMaTienThuong() + "'";
+            
+            
+            st = conn.getConnection().prepareStatement(qry);
+            st.executeUpdate();
+            
+            conn.closeConnection();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TienThuongDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 }
