@@ -316,7 +316,7 @@ public class BangChamCongGUI extends javax.swing.JPanel {
         c.setTime(dateChooser.getDate());
 
         try {
-            for (int i = 0; i < 60; i++) {
+            for (int i = 0; i < 30; i++) {
                 BangChamCong chamCong = new BangChamCong();
                 chamCong.setMaNV("" + (cbMaNV.getSelectedItem()));
 
